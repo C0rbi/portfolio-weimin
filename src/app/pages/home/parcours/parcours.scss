@@ -1,0 +1,168 @@
+@use 'mixins' as *;
+
+.fleuve {
+  position: relative;
+}
+
+.fleuve__trace {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  pointer-events: none;
+
+  path {
+    fill: none;
+    stroke-linecap: round;
+  }
+}
+
+.fleuve__berge {
+  stroke: color-mix(in srgb, var(--water) 55%, transparent);
+  stroke-width: 26;
+}
+
+.fleuve__lit {
+  stroke: var(--water-2);
+  stroke-width: 8;
+}
+
+// La nuit, l'eau reflète la lune : couleurs jade plus claires pour rester visibles.
+:host-context([data-theme='dark']) {
+  .fleuve__berge {
+    stroke: color-mix(in srgb, var(--jade) 18%, transparent);
+  }
+
+  .fleuve__lit {
+    stroke: color-mix(in srgb, var(--jade) 60%, transparent);
+  }
+}
+
+// Le radeau n'apparaît que si les animations sont actives (il descend le fleuve au défilement).
+.fleuve__radeau {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 2;
+  width: 86px;
+  visibility: hidden;
+  pointer-events: none;
+
+  @include below($md) {
+    width: 58px;
+  }
+}
+
+.etapes {
+  position: static;
+  display: grid;
+  gap: clamp(28px, 4vw, 48px);
+  margin: 0;
+  padding: 40px 0;
+  list-style: none;
+}
+
+// Grand écran : lanterne au centre, carte à gauche ou à droite.
+.etape {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr 96px 1fr;
+  align-items: center;
+
+  @include below($md) {
+    grid-template-columns: 60px 1fr;
+    gap: 16px;
+  }
+}
+
+.etape__lanterne {
+  position: relative;
+  z-index: 1;
+  grid-column: 2;
+  grid-row: 1;
+  justify-self: center;
+  width: 52px;
+  transform-origin: 50% 0;
+
+  @include motion-ok {
+    animation: balancement 4.5s ease-in-out infinite alternate;
+  }
+
+  @include below($md) {
+    grid-column: 1;
+    width: 42px;
+  }
+}
+
+.etape:nth-child(2n) .etape__lanterne {
+  animation-delay: -2s;
+}
+
+@keyframes balancement {
+  from {
+    transform: rotate(-3deg);
+  }
+  to {
+    transform: rotate(3deg);
+  }
+}
+
+.etape__carte {
+  grid-column: 1;
+  grid-row: 1;
+  max-width: 460px;
+  justify-self: end;
+  padding: 22px 24px 18px;
+
+  @include below($md) {
+    grid-column: 2;
+    justify-self: stretch;
+    max-width: none;
+  }
+}
+
+.etape--droite .etape__carte {
+  grid-column: 3;
+  justify-self: start;
+
+  @include below($md) {
+    grid-column: 2;
+  }
+}
+
+.etape__periode {
+  margin: 0 0 6px;
+  color: var(--cinnabar);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+h3 {
+  font-size: clamp(1.5rem, 2.4vw, 1.9rem);
+}
+
+.etape__lieu {
+  margin: 4px 0 0;
+  color: var(--ink-3);
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.etape__texte {
+  margin: 10px 0 0;
+  color: var(--ink-2);
+  font-size: 0.98rem;
+}
+
+.etape--origine .etape__carte {
+  border-color: color-mix(in srgb, var(--cinnabar) 40%, transparent);
+}
+
+.etape--avenir .etape__carte {
+  border-style: dashed;
+  background: transparent;
+  box-shadow: none;
+}

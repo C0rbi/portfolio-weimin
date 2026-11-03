@@ -1,0 +1,121 @@
+@use 'mixins' as *;
+
+.pied {
+  position: relative;
+  margin-top: 60px;
+  color: var(--paper);
+}
+
+.pied__montagnes {
+  display: block;
+  width: 100%;
+  height: clamp(60px, 9vw, 140px);
+  margin-bottom: -1px;
+  fill: var(--mtn-4);
+}
+
+.pied__contenu {
+  padding-bottom: 28px;
+  background: var(--mtn-4);
+
+  :host-context([data-theme='dark']) & {
+    background: #050909;
+  }
+}
+
+.hui-band {
+  --hui-color: var(--gold);
+  opacity: 0.45;
+}
+
+.pied__grille {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr auto;
+  gap: 40px;
+  align-items: start;
+  padding-block: 48px 36px;
+
+  @include below($md) {
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+}
+
+:host-context([data-theme='dark']) .pied {
+  color: var(--ink);
+}
+
+.pied__identite {
+  display: flex;
+  gap: 18px;
+
+  p {
+    margin: 0 0 0.3em;
+    color: color-mix(in srgb, currentColor 75%, transparent);
+    font-size: 0.92rem;
+  }
+}
+
+.pied__nom {
+  font-family: var(--font-display);
+  font-size: 1.8rem !important;
+  font-weight: 700;
+  color: currentColor !important;
+}
+
+.pied__devise span {
+  font-family: var(--font-brush);
+  font-size: 1.2em;
+  color: var(--gold);
+}
+
+.pied__liens {
+  display: grid;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+
+  a {
+    color: inherit;
+    font-size: 0.95rem;
+    text-decoration-color: var(--gold);
+  }
+}
+
+.pied__haut {
+  display: grid;
+  justify-items: center;
+  gap: 4px;
+  padding: 14px 18px;
+  border: 1px solid color-mix(in srgb, currentColor 30%, transparent);
+  border-radius: 8px;
+  background: transparent;
+  color: inherit;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: border-color 0.3s;
+
+  span {
+    font-family: var(--font-brush);
+    font-size: 1.3rem;
+    color: var(--gold);
+  }
+
+  &:hover {
+    border-color: var(--gold);
+  }
+
+  @include below($md) {
+    justify-self: start;
+  }
+}
+
+.pied__copyright {
+  margin-bottom: 0;
+  padding-top: 20px;
+  border-top: 1px solid color-mix(in srgb, currentColor 18%, transparent);
+  color: color-mix(in srgb, currentColor 60%, transparent);
+  font-size: 0.8rem;
+}

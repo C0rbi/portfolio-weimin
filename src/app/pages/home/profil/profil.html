@@ -1,0 +1,106 @@
+<section class="section" id="profil" aria-labelledby="titre-profil">
+  <div class="container">
+    <app-section-heading
+      numero="一"
+      kicker="Étape 1"
+      titre="Qui suis-je ?"
+      zh="关于我"
+      pinyin="guānyú wǒ"
+      idTitre="titre-profil"
+    />
+
+    <div class="profil">
+      <figure class="porte">
+        <div class="porte__mur">
+          <div class="porte__photo">
+            <img [src]="profil.photo" alt="Portrait de Weimin LIU" width="387" height="544" loading="lazy" />
+          </div>
+          <svg class="porte__anneau" viewBox="0 0 200 200" aria-hidden="true">
+            <circle cx="100" cy="100" r="96" />
+          </svg>
+        </div>
+        <app-seal texte="桂" [taille]="58" label="Sceau : 桂, le Guangxi" />
+        <figcaption>
+          <span lang="zh-Hans" class="zh">月亮门</span> La « porte de lune » des jardins chinois.
+        </figcaption>
+      </figure>
+
+      <div class="profil__texte">
+        @for (paragraphe of presentation; track $index) {
+          <p appReveal>{{ paragraphe }}</p>
+        }
+
+        <dl class="faits" appStagger>
+          <div>
+            <dt>Âge</dt>
+            <dd>{{ profil.age }} ans</dd>
+          </div>
+          <div>
+            <dt>J'habite</dt>
+            <dd>{{ profil.ville }}</dd>
+          </div>
+          <div>
+            <dt>Originaire de</dt>
+            <dd>{{ profil.origine }} <span lang="zh-Hans" class="zh">广西</span></dd>
+          </div>
+          <div>
+            <dt>Formation</dt>
+            <dd>{{ profil.titre }} — {{ profil.ecole }}</dd>
+          </div>
+        </dl>
+      </div>
+    </div>
+
+    <div class="annexes">
+      <div class="langues paper-card" appReveal>
+        <h3>Langues</h3>
+        <ul>
+          @for (l of langues; track l.nom) {
+            <li>
+              <span class="langues__nom">
+                <strong>{{ l.nom }}</strong>
+                @if (l.natif !== l.nom) {
+                  <span class="natif" [attr.lang]="l.nom === 'Anglais' ? 'en' : l.nom === 'Japonais' ? 'ja' : 'zh-Hans'">{{ l.natif }}</span>
+                }
+              </span>
+              <span class="jauge" role="img" [attr.aria-label]="l.niveau">
+                @for (n of jauge; track n) {
+                  <span class="jauge__point" [class.plein]="n <= l.jauge"></span>
+                }
+              </span>
+              <span class="langues__niveau">{{ l.niveau }}</span>
+            </li>
+          }
+        </ul>
+      </div>
+
+      <div class="guangxi paper-card" appReveal [revealDelay]="0.1">
+        <h3><span lang="zh-Hans" class="zh-brush">桂</span> Le Guangxi en bref</h3>
+        <p>
+          Région autonome du sud de la Chine, frontalière du Viêt Nam, avec Nanning pour capitale. Elle est célèbre
+          pour les pics karstiques de Guilin, la rivière Li et les rizières en terrasses de Longji.
+        </p>
+        <p>
+          C'est la terre des Zhuang, la plus grande minorité ethnique de Chine, connus pour leurs tambours de bronze.
+          L'abréviation du Guangxi, <span lang="zh-Hans" class="zh">桂</span> (guì), désigne aussi l'osmanthus, la fleur
+          de Guilin.
+        </p>
+      </div>
+
+      <div class="interets paper-card" appReveal [revealDelay]="0.2">
+        <h3>Centres d'intérêt</h3>
+        <ul>
+          @for (i of interets; track i.nom) {
+            <li>
+              <span class="interets__zh zh-brush" lang="zh-Hans" aria-hidden="true">{{ i.zh }}</span>
+              <span>
+                <strong>{{ i.nom }}</strong>
+                <small>{{ i.detail }}</small>
+              </span>
+            </li>
+          }
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>

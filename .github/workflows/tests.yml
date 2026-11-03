@@ -1,0 +1,32 @@
+# Intégration continue : à chaque envoi sur GitHub, le projet est installé, testé et construit.
+# Le site n'est PAS publié par GitHub : il est hébergé sur un serveur (voir DEPLOIEMENT.md).
+name: Tests et construction
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verifier:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Installer les dépendances
+        run: npm ci
+
+      - name: Lancer les tests
+        run: npm test -- --watch=false
+
+      - name: Construire le site
+        run: npm run build

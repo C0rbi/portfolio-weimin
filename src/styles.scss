@@ -1,0 +1,12 @@
+// Styles globaux. Les styles propres à chaque composant sont dans son fichier .scss.
+@use 'tokens';
+@use 'base';
+@use 'components';
+@use 'transitions';
+
+// Police calligraphique chinoise, allégée par scripts/subset-font.mjs.
+@font-face {
+  font-family: 'Ma Shan Zheng';
+  src: url('./assets/fonts/ma-shan-zheng-subset.woff2') format('woff2');
+  font-display: swap;
+}

@@ -1,0 +1,96 @@
+@use 'mixins' as *;
+
+.progression {
+  position: fixed;
+  top: 50%;
+  right: 18px;
+  z-index: 40;
+  transform: translateY(-50%);
+
+  // Seulement quand la marge à droite du contenu est assez large pour ne rien recouvrir.
+  @include below(1400px) {
+    display: none;
+  }
+
+  ol {
+    position: relative;
+    display: grid;
+    gap: 14px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  a {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 10px;
+    color: var(--ink-3);
+    text-decoration: none;
+
+    &:hover .label,
+    &:focus-visible .label {
+      opacity: 1;
+      transform: none;
+    }
+
+    &.actif .num {
+      background: var(--cinnabar);
+      border-color: var(--cinnabar);
+      color: var(--on-cinnabar);
+      transform: scale(1.15);
+    }
+  }
+}
+
+.progression__lit {
+  position: absolute;
+  top: 12px;
+  bottom: 12px;
+  right: 13px;
+  width: 2px;
+  border-radius: 2px;
+  background: var(--line-strong);
+  overflow: hidden;
+}
+
+.progression__eau {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(var(--jade-2), var(--jade));
+  transform-origin: top;
+}
+
+.num {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  border: 1px solid var(--line-strong);
+  border-radius: 4px;
+  background: var(--paper);
+  font-family: var(--font-brush);
+  font-size: 0.95rem;
+  transition:
+    background-color 0.3s,
+    color 0.3s,
+    transform 0.4s var(--ease-out);
+}
+
+.label {
+  padding: 3px 8px;
+  border-radius: 4px;
+  background: var(--ink);
+  color: var(--paper);
+  font-size: 0.75rem;
+  font-weight: 600;
+  white-space: nowrap;
+  opacity: 0;
+  transform: translateX(6px);
+  transition:
+    opacity 0.3s,
+    transform 0.3s var(--ease-out);
+}

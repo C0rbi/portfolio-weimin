@@ -1,0 +1,237 @@
+@use 'mixins' as *;
+
+h3 {
+  font-size: clamp(1.5rem, 2.4vw, 1.9rem);
+}
+
+.proverbe {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 6px 14px;
+  margin: -24px 0 40px;
+  color: var(--ink-3);
+  font-style: italic;
+
+  .zh-brush {
+    color: var(--cinnabar);
+    font-size: 1.6rem;
+    font-style: normal;
+  }
+}
+
+// ─── Savoir-faire techniques ───────────────────────────────
+
+.savoir-faire {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+
+  @include below($lg) {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  @include below($md) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.groupe {
+  padding: 24px;
+
+  h3 {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+    margin-bottom: 18px;
+
+    .zh-brush {
+      color: var(--cinnabar);
+      font-size: 1.3rem;
+    }
+  }
+
+  ul {
+    display: grid;
+    gap: 14px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+}
+
+.outil {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+
+  strong {
+    display: block;
+    line-height: 1.25;
+  }
+
+  small {
+    color: var(--ink-3);
+    font-size: 0.85rem;
+  }
+}
+
+// Sigle façon petit sceau, teinté par la couleur de la technologie.
+.outil__sigle {
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: 46px;
+  height: 46px;
+  border: 1.5px solid var(--teinte);
+  border-radius: 6px;
+  background: color-mix(in srgb, var(--teinte) 12%, transparent);
+  color: var(--teinte);
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.02em;
+
+  :host-context([data-theme='dark']) & {
+    color: color-mix(in srgb, var(--teinte) 50%, #fff);
+    border-color: color-mix(in srgb, var(--teinte) 60%, #fff);
+  }
+}
+
+// ─── Environnement d'apprentissage ─────────────────────────
+
+.environnement {
+  margin-top: 20px;
+  padding: 26px 28px;
+
+  h3 {
+    margin-bottom: 18px;
+  }
+}
+
+.environnement__colonnes {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+
+  @include below($md) {
+    grid-template-columns: 1fr;
+  }
+
+  ul {
+    margin: 0;
+    padding-left: 1.1em;
+    color: var(--ink-2);
+    font-size: 0.95rem;
+  }
+
+  li + li {
+    margin-top: 6px;
+  }
+}
+
+.environnement__titre {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  margin-bottom: 8px;
+  font-weight: 700;
+
+  .zh-brush {
+    color: var(--jade);
+    font-size: 1.3rem;
+  }
+}
+
+// ─── Le BTS en bref ────────────────────────────────────────
+
+.bts {
+  margin-top: clamp(56px, 8vw, 100px);
+}
+
+.bts__entete {
+  display: grid;
+  grid-template-columns: clamp(110px, 14vw, 170px) 1fr;
+  gap: clamp(20px, 4vw, 40px);
+  align-items: center;
+  margin-bottom: 28px;
+
+  h3 {
+    margin-bottom: 8px;
+    font-size: clamp(1.8rem, 3.4vw, 2.6rem);
+  }
+
+  p {
+    max-width: 60ch;
+    margin: 0;
+    color: var(--ink-2);
+  }
+
+  @include below($sm) {
+    grid-template-columns: 1fr;
+
+    .tambour {
+      width: 120px;
+    }
+  }
+}
+
+.bts__blocs {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  align-items: start;
+
+  @include below($md) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.bts__bloc {
+  padding: 20px 22px;
+
+  summary {
+    display: grid;
+    gap: 6px;
+    cursor: pointer;
+    list-style: none;
+
+    &::-webkit-details-marker {
+      display: none;
+    }
+
+    &::after {
+      content: 'Voir les compétences +';
+      color: var(--jade);
+      font-size: 0.85rem;
+      font-weight: 600;
+    }
+  }
+
+  &[open] summary::after {
+    content: 'Masquer −';
+  }
+
+  ul {
+    margin: 14px 0 0;
+    padding-left: 1.1em;
+    color: var(--ink-2);
+    font-size: 0.92rem;
+  }
+
+  li + li {
+    margin-top: 6px;
+  }
+}
+
+.bts__num {
+  color: var(--cinnabar);
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.bts__epreuve {
+  color: var(--ink-3);
+  font-size: 0.85rem;
+}

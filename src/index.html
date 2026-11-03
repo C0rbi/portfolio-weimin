@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="fr" data-theme="light">
+<head>
+  <meta charset="utf-8">
+  <title>Weimin LIU — Portfolio BTS SIO SLAM</title>
+  <base href="/">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Portfolio de Weimin LIU, étudiant en BTS SIO option SLAM à Nouméa, originaire du Guangxi (Chine) : parcours, réalisations, compétences et veille technologique.">
+  <meta name="author" content="Weimin LIU">
+  <meta name="theme-color" content="#f3ecdf" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0f1716" media="(prefers-color-scheme: dark)">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="fr_FR">
+  <meta property="og:title" content="Weimin LIU — Portfolio BTS SIO SLAM">
+  <meta property="og:description" content="Un voyage au fil de la rivière Li : parcours, réalisations et veille technologique d'un étudiant en BTS SIO SLAM.">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+
+  <!-- Applique le thème (jour / nuit) et le choix des animations avant l'affichage, pour éviter un flash. -->
+  <script>
+    (function () {
+      var racine = document.documentElement, theme = null, mouvement = null;
+      try {
+        theme = localStorage.getItem('weimin-theme');
+        mouvement = localStorage.getItem('weimin-motion');
+      } catch (e) {}
+      if (theme !== 'light' && theme !== 'dark') {
+        theme = matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+      }
+      racine.setAttribute('data-theme', theme);
+      var anime = mouvement ? mouvement === 'on' : !matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if (anime) racine.classList.add('motion-ok');
+    })();
+  </script>
+
+  <!-- Données structurées : aident les moteurs de recherche à comprendre qui je suis. -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Weimin LIU",
+    "jobTitle": "Étudiant en BTS SIO option SLAM",
+    "email": "mailto:liuwm0716@gmail.com",
+    "sameAs": ["https://github.com/LWM07", "https://www.linkedin.com/in/weimin-liu-2a73332b6/"],
+    "knowsLanguage": ["zh", "fr", "en", "ja"],
+    "address": { "@type": "PostalAddress", "addressLocality": "Nouméa", "addressCountry": "NC" }
+  }
+  </script>
+</head>
+<body>
+  <app-root></app-root>
+  <noscript>
+    <p style="padding:2rem;font-family:sans-serif">Ce portfolio a besoin de JavaScript. Vous pouvez me joindre à liuwm0716@gmail.com.</p>
+  </noscript>
+</body>
+</html>

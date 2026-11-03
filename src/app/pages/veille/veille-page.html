@@ -1,0 +1,164 @@
+<header class="entete">
+  <div class="container">
+    <a class="retour" routerLink="/" fragment="veille">← Retour à l'accueil</a>
+    <p class="kicker"><span lang="zh-Hans" class="zh-brush">技术观察</span> Veille technologique</p>
+    <h1 appSplit="words">{{ sujet.titre }}</h1>
+    <p class="sujet-zh"><span lang="zh-Hans">{{ sujet.zh }}</span> · {{ sujet.pinyin }}</p>
+    <p class="problematique">
+      <strong>Problématique :</strong>
+      {{ sujet.problematique }}
+    </p>
+  </div>
+</header>
+
+<div class="container corps">
+  <section class="bloc">
+    <h2 appReveal>Pourquoi ce sujet ?</h2>
+    <ul class="raisons" appStagger>
+      @for (r of sujet.pourquoi; track r) {
+        <li>{{ r }}</li>
+      }
+    </ul>
+  </section>
+
+  <section class="bloc">
+    <h2 appReveal>Les passkeys en trois temps</h2>
+    <div class="explication">
+      <svg class="schema" viewBox="0 0 400 170" role="img" aria-labelledby="schema-titre">
+        <title id="schema-titre">
+          Le serveur envoie un défi, l'appareil le signe avec la clé privée, le serveur vérifie avec la clé publique.
+        </title>
+        <path class="schema__lien" d="M100 85 H300" />
+        <g transform="translate(100 85)">
+          <rect x="-46" y="-56" width="92" height="112" rx="16" class="schema__appareil" />
+          <text y="-30" text-anchor="middle" class="schema__label">Mon appareil</text>
+          <g class="schema__cle-privee">
+            <circle r="15" class="schema__cle" />
+            <text y="4.5" text-anchor="middle" class="schema__icone">🔑</text>
+          </g>
+          <text y="40" text-anchor="middle" class="schema__petit">clé privée</text>
+        </g>
+        <g transform="translate(300 85)">
+          <rect x="-50" y="-56" width="100" height="112" rx="8" class="schema__serveur" />
+          <text y="-30" text-anchor="middle" class="schema__label">Le site</text>
+          <circle r="15" class="schema__cle schema__cle--publique" />
+          <text y="4.5" text-anchor="middle" class="schema__icone">🔓</text>
+          <text y="40" text-anchor="middle" class="schema__petit">clé publique</text>
+        </g>
+        <circle class="schema__defi" cx="300" cy="85" r="8" />
+        <g class="schema__valide" transform="translate(300 18)">
+          <circle r="13" />
+          <path d="M-6 0 l4 4 8 -9" />
+        </g>
+      </svg>
+      <ol class="temps" appStagger>
+        @for (f of fonctionnement; track f.titre; let i = $index) {
+          <li>
+            <span class="temps__num">{{ i + 1 }}</span>
+            <div>
+              <h3>{{ f.titre }}</h3>
+              <p>{{ f.texte }}</p>
+            </div>
+          </li>
+        }
+      </ol>
+    </div>
+  </section>
+
+  <section class="bloc">
+    <h2 appReveal>Ma méthode et mes outils</h2>
+    <ol class="methode" appStagger>
+      @for (m of methode; track m.titre) {
+        <li class="paper-card">
+          <span class="methode__zh zh-brush" lang="zh-Hans" aria-hidden="true">{{ m.zh }}</span>
+          <h3>{{ m.titre }}</h3>
+          <p>{{ m.texte }}</p>
+        </li>
+      }
+    </ol>
+    <div class="alertes paper-card" appReveal>
+      <h3>Mes mots-clés Google Alertes</h3>
+      <ul>
+        @for (m of motsCles; track m) {
+          <li><code>{{ m }}</code></li>
+        }
+      </ul>
+    </div>
+  </section>
+
+  <section class="bloc">
+    <h2 appReveal>Mes sources</h2>
+    <div class="tableau-defilant" tabindex="0" role="region" aria-label="Tableau des sources de veille">
+      <table class="sources" appReveal>
+        <thead>
+          <tr>
+            <th scope="col">Source</th>
+            <th scope="col">Type</th>
+            <th scope="col">Langue</th>
+            <th scope="col">Pourquoi je la suis</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (s of sources; track s.url) {
+            <tr>
+              <td><a [href]="s.url" target="_blank" rel="noopener">{{ s.nom }}</a></td>
+              <td>{{ s.type }}</td>
+              <td>{{ s.langue }}</td>
+              <td>{{ s.pourquoi }}</td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="bloc">
+    <h2 appReveal>Le fil de l'actualité</h2>
+    <p class="consigne" appReveal>{{ articles.length }} fiches, de la plus récente à la plus ancienne.</p>
+    <div class="fil">
+      <span class="fil__ligne" aria-hidden="true"></span>
+      <ol class="fil__liste">
+      @for (a of articles; track a.url) {
+        <li class="fiche" appReveal="right">
+          <time [attr.datetime]="a.date">{{ dateLisible(a.date) }}</time>
+          <div class="fiche__carte paper-card">
+            <h3>{{ a.titre }}</h3>
+            <p>{{ a.resume }}</p>
+            <p class="fiche__analyse"><strong>Mon analyse :</strong> {{ a.analyse }}</p>
+            <div class="fiche__pied">
+              <span class="tags">
+                @for (t of a.tags; track t) {
+                  <span class="chip">{{ t }}</span>
+                }
+              </span>
+              <a [href]="a.url" target="_blank" rel="noopener">{{ a.source }} <span aria-hidden="true">↗</span></a>
+            </div>
+          </div>
+        </li>
+      }
+      </ol>
+    </div>
+  </section>
+
+  <section class="bloc">
+    <h2 appReveal>Les limites</h2>
+    <div class="limites" appStagger>
+      @for (l of limites; track l.titre) {
+        <div class="paper-card">
+          <h3>{{ l.titre }}</h3>
+          <p>{{ l.texte }}</p>
+        </div>
+      }
+    </div>
+  </section>
+
+  <section class="bloc bilan" appReveal>
+    <h2>Mon bilan</h2>
+    @for (p of bilan; track $index) {
+      <p>{{ p }}</p>
+    }
+    <p class="bilan__autres">
+      D'autres sujets que je pourrais suivre : {{ autresSujets.join(' ; ') }}.
+    </p>
+  </section>
+</div>

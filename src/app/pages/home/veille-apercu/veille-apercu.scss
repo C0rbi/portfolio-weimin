@@ -1,0 +1,140 @@
+@use 'mixins' as *;
+
+.grille {
+  display: grid;
+  grid-template-columns: 1fr 1.15fr;
+  gap: clamp(24px, 4vw, 48px);
+  align-items: start;
+
+  @include below($md) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.sujet {
+  position: sticky;
+  top: calc(var(--header-h) + 20px);
+  padding: clamp(24px, 3vw, 36px);
+
+  @include below($md) {
+    position: static;
+  }
+
+  h3 {
+    margin: 12px 0 8px;
+    font-size: clamp(1.9rem, 3.4vw, 2.6rem);
+  }
+}
+
+.sujet__zh {
+  color: var(--ink-3);
+  letter-spacing: 0.06em;
+
+  span {
+    margin-right: 0.2em;
+    font-family: var(--font-brush);
+    font-size: 1.5rem;
+    color: var(--cinnabar);
+  }
+}
+
+.sujet__problematique {
+  margin-bottom: 1.6em;
+  color: var(--ink-2);
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  font-style: italic;
+  line-height: 1.4;
+}
+
+.fil__titre {
+  margin: 0 0 14px;
+  color: var(--ink-3);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.fil {
+  display: grid;
+  gap: 16px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.fiche {
+  position: relative;
+  padding: 18px 20px 16px 22px;
+  border-left: 3px solid var(--jade);
+  border-radius: 0 var(--radius) var(--radius) 0;
+  background: var(--card);
+
+  time {
+    color: var(--jade);
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+  }
+
+  h4 {
+    margin: 6px 0 8px;
+    font-size: 1.3rem;
+  }
+
+  p {
+    margin-bottom: 8px;
+    color: var(--ink-2);
+    font-size: 0.93rem;
+  }
+
+  a {
+    color: var(--ink-3);
+    font-size: 0.85rem;
+    font-weight: 600;
+  }
+}
+
+.methode {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 18px;
+  margin: clamp(48px, 7vw, 80px) 0 0;
+  padding: 0;
+  list-style: none;
+  counter-reset: etape;
+
+  @include below($lg) {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  @include below($sm) {
+    grid-template-columns: 1fr;
+  }
+
+  li {
+    position: relative;
+    padding: 22px 20px 18px;
+    border-top: 2px solid var(--ink);
+  }
+
+  strong {
+    display: block;
+    margin: 8px 0 6px;
+    font-size: 1.05rem;
+  }
+
+  p {
+    margin: 0;
+    color: var(--ink-2);
+    font-size: 0.92rem;
+  }
+}
+
+.methode__zh {
+  display: block;
+  color: var(--cinnabar);
+  font-size: 2.6rem;
+  line-height: 1;
+}

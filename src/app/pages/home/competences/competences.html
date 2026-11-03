@@ -1,0 +1,88 @@
+<section class="section" id="competences" aria-labelledby="titre-competences">
+  <div class="container">
+    <app-section-heading
+      numero="三"
+      kicker="Étape 3"
+      titre="Mes compétences"
+      zh="技能"
+      pinyin="jìnéng"
+      idTitre="titre-competences"
+      intro="Les langages et les outils que j'utilise, ma façon d'apprendre, et le programme du BTS SIO."
+    />
+
+    <p class="proverbe" appReveal>
+      <span lang="zh-Hans" class="zh-brush">熟能生巧</span>
+      « C'est en forgeant qu'on devient forgeron. »
+    </p>
+
+    <div class="savoir-faire">
+      @for (g of groupes; track g.titre) {
+        <div class="groupe paper-card" appReveal>
+          <h3>
+            <span lang="zh-Hans" class="zh-brush" aria-hidden="true">{{ g.zh }}</span>
+            {{ g.titre }}
+          </h3>
+          <ul>
+            @for (item of g.items; track item.nom) {
+              <li class="outil">
+                <span class="outil__sigle" [style.--teinte]="item.couleur" aria-hidden="true">{{ item.sigle }}</span>
+                <span>
+                  <strong>{{ item.nom }}</strong>
+                  <small>{{ item.detail }}</small>
+                </span>
+              </li>
+            }
+          </ul>
+        </div>
+      }
+    </div>
+
+    <div class="environnement paper-card" appReveal>
+      <h3>Mon environnement d'apprentissage</h3>
+      <div class="environnement__colonnes">
+        @for (bloc of environnement; track bloc.titre) {
+          <div>
+            <p class="environnement__titre">
+              <span lang="zh-Hans" class="zh-brush" aria-hidden="true">{{ bloc.zh }}</span>
+              {{ bloc.titre }}
+            </p>
+            <ul>
+              @for (e of bloc.elements; track e) {
+                <li>{{ e }}</li>
+              }
+            </ul>
+          </div>
+        }
+      </div>
+    </div>
+
+    <div class="bts">
+      <div class="bts__entete" appReveal>
+        <app-bronze-drum class="tambour" />
+        <div>
+          <h3>Le BTS SIO en bref</h3>
+          <p>
+            Deux ans de formation, trois blocs de compétences et trois épreuves professionnelles. Le motif tourne comme
+            un tambour de bronze zhuang, emblème du Guangxi.
+          </p>
+        </div>
+      </div>
+      <div class="bts__blocs" appStagger>
+        @for (b of blocs; track b.numero) {
+          <details class="bts__bloc paper-card">
+            <summary>
+              <span class="bts__num">Bloc {{ b.numero }}</span>
+              <strong>{{ b.titre }}</strong>
+              <span class="bts__epreuve">{{ b.epreuve }}</span>
+            </summary>
+            <ul>
+              @for (c of b.competences; track c) {
+                <li>{{ c }}</li>
+              }
+            </ul>
+          </details>
+        }
+      </div>
+    </div>
+  </div>
+</section>

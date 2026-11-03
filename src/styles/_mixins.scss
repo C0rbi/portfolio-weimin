@@ -1,0 +1,37 @@
+// Outils SCSS partagés par les composants (importés avec `@use 'mixins' as *;`).
+
+$sm: 600px;
+$md: 900px;
+$lg: 1200px;
+
+@mixin from($min) {
+  @media (min-width: $min) {
+    @content;
+  }
+}
+
+@mixin below($max) {
+  @media (max-width: ($max - 0.02px)) {
+    @content;
+  }
+}
+
+// Styles appliqués seulement quand les animations sont activées (classe .motion-ok sur <html>).
+// :host-context traverse l'encapsulation des composants Angular.
+@mixin motion-ok {
+  :host-context(.motion-ok) & {
+    @content;
+  }
+}
+
+// Petit libellé en chinois sous un titre français.
+@mixin zh-label {
+  font-family: var(--font-zh);
+  letter-spacing: 0.12em;
+  color: var(--ink-3);
+}
+
+@mixin focus-ring {
+  outline: 2px solid var(--cinnabar);
+  outline-offset: 3px;
+}

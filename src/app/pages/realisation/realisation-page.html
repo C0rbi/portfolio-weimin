@@ -1,0 +1,152 @@
+@for (r of courante(); track r.slug) {
+  <!-- @for sur une seule fiche : quand on passe à la suivante, la vue est recréée et les animations rejouées. -->
+  <article class="fiche">
+    <header class="fiche__entete">
+      <div class="container">
+        <a class="retour" routerLink="/" fragment="realisations">← Toutes les réalisations</a>
+        <div class="fiche__titre">
+          <div>
+            <p class="kicker">{{ libelles[r.contexte] }}</p>
+            <h1 appSplit="words">{{ r.titre }}</h1>
+            <p class="lead">{{ r.resume }}</p>
+          </div>
+          <app-seal [texte]="r.zh" [taille]="92" />
+        </div>
+        @if (r.aCompleter) {
+          <p class="draft-badge">Brouillon : cette fiche n'apparaît pas sur le site en ligne</p>
+        }
+        <dl class="meta">
+          <div>
+            <dt>Lieu</dt>
+            <dd>{{ r.lieu }}</dd>
+          </div>
+          <div>
+            <dt>Année</dt>
+            <dd>{{ r.periode }}</dd>
+          </div>
+          @if (r.modalite) {
+            <div>
+              <dt>Modalité</dt>
+              <dd>{{ r.modalite }}</dd>
+            </div>
+          }
+          <div>
+            <dt>Technologies</dt>
+            <dd>
+              <ul class="techs">
+                @for (t of r.technologies; track t) {
+                  <li class="chip">{{ t }}</li>
+                }
+              </ul>
+            </dd>
+          </div>
+        </dl>
+      </div>
+    </header>
+
+    <div class="container fiche__corps">
+      <div class="fiche__texte">
+        <section appReveal>
+          <h2><span lang="zh-Hans" class="zh-brush" aria-hidden="true">境</span> Contexte et besoin</h2>
+          <p>{{ r.contexteDetail }}</p>
+        </section>
+
+        <section appReveal>
+          <h2><span lang="zh-Hans" class="zh-brush" aria-hidden="true">标</span> Objectifs</h2>
+          <ul class="puces">
+            @for (o of r.objectifs; track o) {
+              <li>{{ o }}</li>
+            }
+          </ul>
+        </section>
+
+        <section>
+          <h2 appReveal><span lang="zh-Hans" class="zh-brush" aria-hidden="true">步</span> Ce que j'ai réalisé</h2>
+          <ol class="etapes" appStagger>
+            @for (e of r.etapes; track e; let i = $index) {
+              <li>
+                <span class="etapes__num">{{ i + 1 }}</span>
+                <p>{{ e }}</p>
+              </li>
+            }
+          </ol>
+        </section>
+
+        @if (r.maContribution) {
+          <section appReveal>
+            <h2><span lang="zh-Hans" class="zh-brush" aria-hidden="true">我</span> Ma contribution dans l'équipe</h2>
+            <p>{{ r.maContribution }}</p>
+          </section>
+        }
+
+        <section class="bilan" appReveal>
+          <h2><span lang="zh-Hans" class="zh-brush" aria-hidden="true">思</span> Bilan</h2>
+          <p>{{ r.bilan }}</p>
+        </section>
+      </div>
+
+      <aside class="fiche__cote">
+        <div class="paper-card bloc" appReveal="right">
+          <h2>Compétences du bloc 1</h2>
+          <ul class="competences">
+            @for (c of competences(); track c.code) {
+              <li>
+                <span class="code-badge">{{ c.code }}</span>
+                <span>
+                  {{ c.titre }}
+                  @if (r.preuves[c.code]; as preuve) {
+                    <small class="preuve">{{ preuve }}</small>
+                  }
+                </span>
+              </li>
+            }
+          </ul>
+          @if (r.autresCompetences.length) {
+            <h3>Blocs 2 et 3</h3>
+            <ul class="autres">
+              @for (a of r.autresCompetences; track a) {
+                <li>{{ a }}</li>
+              }
+            </ul>
+          }
+        </div>
+
+        @if (r.liens.length) {
+          <div class="paper-card bloc" appReveal="right" [revealDelay]="0.1">
+            <h2>Accès aux productions</h2>
+            <ul class="liens">
+              @for (l of r.liens; track l.url) {
+                <li>
+                  <a [href]="l.url" target="_blank" rel="noopener">{{ l.label }} <span aria-hidden="true">↗</span></a>
+                </li>
+              }
+            </ul>
+          </div>
+        }
+      </aside>
+    </div>
+
+    <nav class="container voisines" aria-label="Autres réalisations">
+      @if (precedente(); as p) {
+        <a class="voisine" [routerLink]="['/realisations', p.slug]">
+          <small>← Précédente</small>
+          <strong>{{ p.titre }}</strong>
+        </a>
+      } @else {
+        <span></span>
+      }
+      @if (suivante(); as s) {
+        <a class="voisine voisine--suivante" [routerLink]="['/realisations', s.slug]">
+          <small>Suivante →</small>
+          <strong>{{ s.titre }}</strong>
+        </a>
+      }
+    </nav>
+  </article>
+} @empty {
+  <section class="container introuvable">
+    <h1>Réalisation introuvable</h1>
+    <p>Cette fiche n'existe pas (ou plus).</p>
+    <a class="btn btn--seal" routerLink="/" fragment="realisations">Voir toutes mes réalisations</a>
+  </section>
+}

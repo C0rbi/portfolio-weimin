@@ -1,0 +1,80 @@
+// Palette « encre et papier de riz » (jour) et « nuit sur la rivière Li » (nuit).
+// Toutes les couleurs passent par des variables CSS : le thème change sans recharger la page.
+
+:root {
+  --paper: #f3ecdf; // 宣纸 papier de riz
+  --paper-2: #ebe2d1;
+  --paper-3: #dfd3bc;
+  --ink: #1d1b18; // 墨 encre
+  --ink-2: #4a463f;
+  --ink-3: #6a6458;
+  --line: rgba(29, 27, 24, 0.14);
+  --line-strong: rgba(29, 27, 24, 0.28);
+  --cinnabar: #b8321f; // 朱砂 rouge des sceaux
+  --cinnabar-2: #d4472f;
+  --on-cinnabar: #fbf5ea;
+  --jade: #2f6b5e; // 玉 eaux de la rivière Li
+  --jade-2: #4f8a7b;
+  --gold: #d9952a; // 桂花 osmanthus (décor uniquement, pas pour du texte)
+  --bronze: #8c6a3f; // 铜鼓 tambour de bronze
+  --water: #a9c7bd;
+  --water-2: #7fa89c;
+  --mtn-1: #cbc4b4;
+  --mtn-2: #a59e8f;
+  --mtn-3: #6f6a5f;
+  --mtn-4: #34322d;
+  --mist: 243, 236, 223; // en RGB pour rgba()
+  --sun: #c8402a;
+  --sun-glow: rgba(200, 64, 42, 0.18);
+  --card: rgba(251, 247, 239, 0.72);
+  --shadow: 0 18px 40px -18px rgba(43, 33, 20, 0.35);
+  --shadow-soft: 0 6px 18px -8px rgba(43, 33, 20, 0.25);
+  --noise-opacity: 0.55;
+
+  --font-display: 'Cormorant Garamond Variable', 'Cormorant Garamond', Georgia, 'Times New Roman', serif;
+  --font-body: 'Inter Variable', Inter, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --font-brush: 'Ma Shan Zheng', 'Kaiti SC', 'STKaiti', 'KaiTi', 'Noto Serif SC', serif;
+  --font-zh: 'Noto Serif SC', 'Source Han Serif SC', 'Songti SC', 'STSong', 'SimSun', serif;
+
+  --header-h: 76px;
+  --radius: 14px;
+  --container: 1180px;
+  --gutter: clamp(16px, 4vw, 40px);
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-in-out: cubic-bezier(0.7, 0, 0.3, 1);
+
+  color-scheme: light;
+}
+
+:root[data-theme='dark'] {
+  --paper: #0f1716;
+  --paper-2: #152120;
+  --paper-3: #1c2b29;
+  --ink: #ece4d4;
+  --ink-2: #c6bca9;
+  --ink-3: #9a917f;
+  --line: rgba(236, 228, 212, 0.14);
+  --line-strong: rgba(236, 228, 212, 0.28);
+  --cinnabar: #e0563c;
+  --cinnabar-2: #f06a4f;
+  --on-cinnabar: #160d0a;
+  --jade: #84bcac;
+  --jade-2: #a4d3c4;
+  --gold: #f2b84e;
+  --bronze: #c39a62;
+  --water: #1f3936;
+  --water-2: #2e5550;
+  --mtn-1: #263634;
+  --mtn-2: #1c2a28;
+  --mtn-3: #142120;
+  --mtn-4: #0a1211;
+  --mist: 15, 23, 22;
+  --sun: #efe6c8; // la lune
+  --sun-glow: rgba(239, 230, 200, 0.16);
+  --card: rgba(23, 35, 33, 0.72);
+  --shadow: 0 18px 40px -18px rgba(0, 0, 0, 0.7);
+  --shadow-soft: 0 6px 18px -8px rgba(0, 0, 0, 0.6);
+  --noise-opacity: 0.35;
+
+  color-scheme: dark;
+}

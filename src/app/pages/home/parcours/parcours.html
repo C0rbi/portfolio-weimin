@@ -1,0 +1,42 @@
+<section class="section" id="parcours" aria-labelledby="titre-parcours">
+  <div class="container">
+    <app-section-heading
+      numero="二"
+      kicker="Étape 2"
+      titre="Mon parcours"
+      zh="经历"
+      pinyin="jīnglì"
+      idTitre="titre-parcours"
+      intro="De la source, dans le Guangxi, jusqu'au BTS SIO : chaque lanterne marque une étape du voyage."
+    />
+
+    <div class="fleuve" #fleuve>
+      <svg class="fleuve__trace" aria-hidden="true">
+        <path class="fleuve__berge" />
+        <path class="fleuve__lit" />
+      </svg>
+      <app-raft class="fleuve__radeau" aria-hidden="true" />
+
+      <ol class="etapes">
+        @for (e of etapes; track e.titre; let i = $index) {
+          <li class="etape etape--{{ e.type }}" [class.etape--droite]="i % 2 === 1">
+            <div class="etape__lanterne">
+              <app-lantern [caractere]="e.zh" />
+            </div>
+            <article class="etape__carte paper-card" [class.draft]="e.aCompleter">
+              @if (e.aCompleter) {
+                <span class="draft-badge">À compléter</span>
+              }
+              <p class="etape__periode">{{ e.periode }}</p>
+              <h3>{{ e.titre }}</h3>
+              @if (e.lieu) {
+                <p class="etape__lieu">{{ e.lieu }}</p>
+              }
+              <p class="etape__texte">{{ e.description }}</p>
+            </article>
+          </li>
+        }
+      </ol>
+    </div>
+  </div>
+</section>

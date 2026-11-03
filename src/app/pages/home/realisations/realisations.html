@@ -1,0 +1,65 @@
+<section class="section" id="realisations" aria-labelledby="titre-realisations">
+  <div class="container">
+    <app-section-heading
+      numero="四"
+      kicker="Étape 4"
+      titre="Mes réalisations"
+      zh="作品"
+      pinyin="zuòpǐn"
+      idTitre="titre-realisations"
+      intro="Les projets menés en formation et en entreprise. Chaque fiche détaille le contexte, ma démarche, les technologies et les compétences du référentiel mobilisées."
+    />
+
+    @if (filtres.length > 2) {
+      <div class="filtres" role="group" aria-label="Filtrer les réalisations">
+        @for (f of filtres; track f.valeur) {
+          <button
+            type="button"
+            class="filtre"
+            [class.filtre--actif]="filtre() === f.valeur"
+            [attr.aria-pressed]="filtre() === f.valeur"
+            (click)="filtre.set(f.valeur)"
+          >
+            {{ f.label }} <span class="filtre__nombre">{{ f.nombre }}</span>
+          </button>
+        }
+      </div>
+    }
+
+    <ul class="rouleaux">
+      @for (r of affichees(); track r.slug) {
+        <li class="rouleau" [class.draft]="r.aCompleter">
+          <a class="rouleau__lien" [routerLink]="['/realisations', r.slug]">
+            <span class="rouleau__baguette" aria-hidden="true"></span>
+            <div class="rouleau__papier">
+              <div class="rouleau__entete">
+                <span class="chip">{{ libelles[r.contexte] }}</span>
+                <span class="rouleau__zh zh-brush" lang="zh-Hans" aria-hidden="true">{{ r.zh }}</span>
+              </div>
+              @if (r.aCompleter) {
+                <span class="draft-badge">À compléter</span>
+              }
+              <h3>{{ r.titre }}</h3>
+              <p class="rouleau__periode">{{ r.lieu }} · {{ r.periode }}</p>
+              <p class="rouleau__resume">{{ r.resume }}</p>
+              <ul class="rouleau__techs" aria-label="Technologies">
+                @for (t of r.technologies.slice(0, 5); track t) {
+                  <li class="chip">{{ t }}</li>
+                }
+              </ul>
+              <div class="rouleau__pied">
+                <span class="rouleau__codes" aria-label="Compétences du bloc 1">
+                  @for (c of r.competences; track c) {
+                    <span class="code-badge">{{ c }}</span>
+                  }
+                </span>
+                <span class="rouleau__voir">Lire la fiche <span aria-hidden="true">→</span></span>
+              </div>
+            </div>
+            <span class="rouleau__baguette rouleau__baguette--bas" aria-hidden="true"></span>
+          </a>
+        </li>
+      }
+    </ul>
+  </div>
+</section>

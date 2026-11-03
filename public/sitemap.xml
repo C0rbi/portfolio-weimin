@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Plan du site pour les moteurs de recherche : remplacer DOMAINE-DU-SITE par l'adresse du site (voir DEPLOIEMENT.md). -->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url><loc>https://DOMAINE-DU-SITE/</loc></url>
+  <url><loc>https://DOMAINE-DU-SITE/veille</loc></url>
+  <url><loc>https://DOMAINE-DU-SITE/realisations/stocks-en-ligne-marine-corail</loc></url>
+  <url><loc>https://DOMAINE-DU-SITE/realisations/affichage-dynamique-xibo</loc></url>
+  <url><loc>https://DOMAINE-DU-SITE/realisations/portfolio-au-fil-du-li</loc></url>
+  <url><loc>https://DOMAINE-DU-SITE/realisations/premiers-pas-git-github</loc></url>
+  <url><loc>https://DOMAINE-DU-SITE/mentions-legales</loc></url>
+</urlset>

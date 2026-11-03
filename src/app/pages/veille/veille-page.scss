@@ -1,0 +1,429 @@
+@use 'mixins' as *;
+
+.entete {
+  padding: calc(var(--header-h) + clamp(32px, 6vw, 72px)) 0 clamp(36px, 5vw, 56px);
+  border-bottom: 1px solid var(--line);
+  background: linear-gradient(to bottom, color-mix(in srgb, var(--water) 40%, transparent), transparent);
+
+  .kicker .zh-brush {
+    font-size: 1.4em;
+    letter-spacing: 0.1em;
+  }
+
+  h1 {
+    max-width: 18ch;
+    margin: 14px 0 10px;
+    font-size: clamp(2.6rem, 6.5vw, 5rem);
+  }
+}
+
+.retour {
+  display: inline-block;
+  margin-bottom: 24px;
+  color: var(--ink-2);
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.sujet-zh {
+  color: var(--ink-3);
+  letter-spacing: 0.06em;
+
+  span {
+    font-family: var(--font-brush);
+    font-size: 1.6rem;
+    color: var(--cinnabar);
+  }
+}
+
+.problematique {
+  max-width: 62ch;
+  margin: 0;
+  padding: 18px 22px;
+  border-left: 4px solid var(--cinnabar);
+  background: var(--card);
+  font-family: var(--font-display);
+  font-size: clamp(1.2rem, 2vw, 1.45rem);
+  line-height: 1.4;
+
+  strong {
+    display: block;
+    font-family: var(--font-body);
+    font-size: 0.75rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--cinnabar);
+  }
+}
+
+.corps {
+  display: grid;
+  gap: clamp(56px, 8vw, 96px);
+  padding-block: clamp(48px, 7vw, 88px);
+}
+
+.bloc h2 {
+  margin-bottom: 22px;
+  font-size: clamp(2rem, 4vw, 3rem);
+}
+
+h3 {
+  font-size: 1.35rem;
+}
+
+.raisons {
+  display: grid;
+  gap: 12px;
+  max-width: 70ch;
+  margin: 0;
+  padding-left: 1.2em;
+  color: var(--ink-2);
+}
+
+// ─── Schéma ────────────────────────────────────────────────
+
+.explication {
+  display: grid;
+  grid-template-columns: minmax(280px, 1fr) 1fr;
+  gap: clamp(28px, 5vw, 56px);
+  align-items: center;
+
+  @include below($md) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.schema {
+  width: 100%;
+  overflow: visible;
+}
+
+.schema__lien {
+  stroke: var(--line-strong);
+  stroke-width: 2;
+  stroke-dasharray: 6 6;
+}
+
+.schema__appareil,
+.schema__serveur {
+  fill: var(--card);
+  stroke: var(--ink);
+  stroke-width: 1.5;
+}
+
+.schema__label {
+  fill: var(--ink);
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.schema__petit {
+  fill: var(--ink-3);
+  font-size: 10px;
+}
+
+.schema__cle {
+  fill: color-mix(in srgb, var(--cinnabar) 18%, transparent);
+  stroke: var(--cinnabar);
+}
+
+.schema__cle--publique {
+  fill: color-mix(in srgb, var(--jade) 18%, transparent);
+  stroke: var(--jade);
+}
+
+.schema__icone {
+  font-size: 13px;
+}
+
+.schema__defi {
+  fill: var(--cinnabar);
+  opacity: 0;
+}
+
+.schema__valide {
+  opacity: 0;
+
+  circle {
+    fill: var(--jade);
+  }
+
+  path {
+    fill: none;
+    stroke: var(--paper);
+    stroke-width: 2.5;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+}
+
+.temps {
+  display: grid;
+  gap: 18px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+
+  li {
+    display: grid;
+    grid-template-columns: 44px 1fr;
+    gap: 14px;
+  }
+
+  p {
+    margin: 4px 0 0;
+    color: var(--ink-2);
+    font-size: 0.95rem;
+  }
+}
+
+.temps__num {
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 6px;
+  background: var(--cinnabar);
+  color: var(--on-cinnabar);
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  font-weight: 700;
+}
+
+// ─── Méthode ───────────────────────────────────────────────
+
+.methode {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  margin: 0 0 18px;
+  padding: 0;
+  list-style: none;
+
+  @include below($lg) {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  @include below($sm) {
+    grid-template-columns: 1fr;
+  }
+
+  li {
+    padding: 22px 20px;
+  }
+
+  p {
+    margin: 6px 0 0;
+    color: var(--ink-2);
+    font-size: 0.92rem;
+  }
+}
+
+.methode__zh {
+  color: var(--cinnabar);
+  font-size: 2.4rem;
+  line-height: 1;
+}
+
+.alertes {
+  padding: 20px 22px;
+
+  ul {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 12px 0 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  code {
+    display: inline-block;
+    padding: 4px 10px;
+    border-radius: 6px;
+    background: var(--paper-2);
+    font-size: 0.85rem;
+  }
+}
+
+// ─── Sources ───────────────────────────────────────────────
+
+.tableau-defilant {
+  overflow-x: auto;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--card);
+}
+
+.sources {
+  width: 100%;
+  min-width: 640px;
+  border-collapse: collapse;
+  font-size: 0.93rem;
+
+  th,
+  td {
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--line);
+    text-align: left;
+    vertical-align: top;
+  }
+
+  th {
+    color: var(--cinnabar);
+    font-size: 0.74rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  td:last-child {
+    color: var(--ink-2);
+  }
+
+  a {
+    font-weight: 700;
+  }
+}
+
+// ─── Fil chronologique ─────────────────────────────────────
+
+.consigne {
+  margin-top: -10px;
+  color: var(--ink-3);
+}
+
+.fil {
+  position: relative;
+  padding-left: 28px;
+}
+
+.fil__liste {
+  display: grid;
+  gap: 22px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.fil__ligne {
+  position: absolute;
+  top: 6px;
+  bottom: 6px;
+  left: 6px;
+  width: 2px;
+  background: var(--jade);
+}
+
+.fiche {
+  position: relative;
+  display: grid;
+  grid-template-columns: 150px 1fr;
+  gap: 20px;
+
+  @include below($md) {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 6px;
+    left: -27px;
+    width: 12px;
+    height: 12px;
+    border: 2px solid var(--jade);
+    border-radius: 50%;
+    background: var(--paper);
+  }
+
+  time {
+    padding-top: 2px;
+    color: var(--jade);
+    font-weight: 700;
+    font-size: 0.9rem;
+  }
+}
+
+.fiche__carte {
+  padding: 20px 22px 16px;
+
+  h3 {
+    margin-bottom: 8px;
+  }
+
+  p {
+    color: var(--ink-2);
+    font-size: 0.95rem;
+  }
+}
+
+.fiche__analyse {
+  padding: 10px 14px;
+  border-radius: 8px;
+  background: color-mix(in srgb, var(--cinnabar) 7%, transparent);
+  color: var(--ink) !important;
+
+  strong {
+    color: var(--cinnabar);
+  }
+}
+
+.fiche__pied {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+
+  a {
+    font-size: 0.88rem;
+    font-weight: 700;
+  }
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+// ─── Limites et bilan ──────────────────────────────────────
+
+.limites {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+
+  @include below($md) {
+    grid-template-columns: 1fr;
+  }
+
+  > div {
+    padding: 22px 20px;
+  }
+
+  p {
+    margin: 8px 0 0;
+    color: var(--ink-2);
+    font-size: 0.93rem;
+  }
+}
+
+.bilan {
+  max-width: 72ch;
+  padding: clamp(24px, 4vw, 40px);
+  border: 1.5px solid var(--cinnabar);
+  border-radius: var(--radius);
+
+  p {
+    font-size: 1.05rem;
+  }
+}
+
+.bilan__autres {
+  margin: 0;
+  color: var(--ink-3);
+  font-size: 0.9rem !important;
+}

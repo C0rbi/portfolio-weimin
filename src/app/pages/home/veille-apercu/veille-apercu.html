@@ -1,0 +1,47 @@
+<section class="section" id="veille" aria-labelledby="titre-veille">
+  <div class="container">
+    <app-section-heading
+      numero="五"
+      kicker="Étape 5"
+      titre="Ma veille technologique"
+      zh="观察"
+      pinyin="guānchá"
+      idTitre="titre-veille"
+      intro="Observer, trier et comprendre ce qui change dans mon métier, en suivant un sujet précis dans la durée."
+    />
+
+    <div class="grille">
+      <div class="sujet paper-card" appReveal="left">
+        <p class="kicker">Mon sujet</p>
+        <h3>{{ sujet.titre }}</h3>
+        <p class="sujet__zh"><span lang="zh-Hans">{{ sujet.zh }}</span> · {{ sujet.pinyin }}</p>
+        <p class="sujet__problematique">{{ sujet.problematique }}</p>
+        <a class="btn btn--seal" routerLink="/veille" appMagnetic>Lire toute ma veille</a>
+      </div>
+
+      <div>
+        <p class="fil__titre">Dernières fiches</p>
+        <ol class="fil" appStagger>
+          @for (a of dernieres; track a.url) {
+            <li class="fiche">
+              <time [attr.datetime]="a.date">{{ dateLisible(a.date) }}</time>
+              <h4>{{ a.titre }}</h4>
+              <p>{{ a.resume }}</p>
+              <a [href]="a.url" target="_blank" rel="noopener">Source : {{ a.source }} <span aria-hidden="true">↗</span></a>
+            </li>
+          }
+        </ol>
+      </div>
+    </div>
+
+    <ol class="methode" appStagger aria-label="Ma méthode de veille">
+      @for (m of methode; track m.titre; let i = $index) {
+        <li>
+          <span class="methode__zh zh-brush" lang="zh-Hans" aria-hidden="true">{{ m.zh }}</span>
+          <strong>{{ i + 1 }}. {{ m.titre }}</strong>
+          <p>{{ m.texte }}</p>
+        </li>
+      }
+    </ol>
+  </div>
+</section>

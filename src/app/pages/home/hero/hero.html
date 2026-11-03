@@ -1,0 +1,104 @@
+<section class="hero" id="accueil" aria-labelledby="hero-titre">
+  <div class="paysage" aria-hidden="true">
+    <div class="ciel"></div>
+    <div class="etoiles"></div>
+    <div class="astre"><div class="astre__disque"></div></div>
+
+    <svg class="oiseaux" viewBox="0 0 120 40">
+      <path d="M2 18 q7 -8 14 0 q7 -8 14 0" />
+      <path d="M40 8 q5 -6 10 0 q5 -6 10 0" />
+      <path d="M70 26 q6 -7 12 0 q6 -7 12 0" />
+    </svg>
+
+    @for (c of couches; track c.nom) {
+      <div class="couche couche--{{ c.nom }}">
+        <svg viewBox="0 0 1600 900" preserveAspectRatio="xMidYMax slice">
+          <defs>
+            <linearGradient [attr.id]="'degrade-' + c.nom" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" class="haut" />
+              <stop offset="0.72" class="milieu" />
+              <stop offset="1" class="bas" />
+            </linearGradient>
+          </defs>
+          <path [attr.d]="c.d" [attr.fill]="'url(#degrade-' + c.nom + ')'" />
+          @if (c.nom === 'premier-plan') {
+            <rect class="eau" x="-100" y="832" width="1800" height="80" />
+            <path class="reflets" d="M1380 846 h170 M1410 858 h150 M1436 870 h120 M1452 882 h96 M-20 846 h150 M0 858 h110" />
+            <path
+              class="vaguelettes"
+              d="M220 850 h70 M400 862 h46 M580 853 h90 M770 868 h56 M950 850 h80 M1120 862 h66 M310 876 h56 M650 884 h66 M1010 888 h46"
+            />
+          }
+        </svg>
+        @if (c.nom === 'premier-plan') {
+          <app-raft class="hero__radeau" />
+        }
+      </div>
+      @if (c.nom === 'loin') {
+        <div class="brume brume--haute"></div>
+      }
+      @if (c.nom === 'milieu') {
+        <div class="brume brume--basse"></div>
+      }
+    }
+    <app-osmanthus-rain />
+  </div>
+
+  <div class="hero__voile" aria-hidden="true"></div>
+
+  <div class="hero__contenu container">
+    <p class="kicker hero__kicker"><span lang="zh-Hans">你好</span> BTS SIO · option SLAM · 2025 — 2026</p>
+    <h1 class="hero__nom" id="hero-titre">
+      <span class="prenom">{{ profil.prenom }}</span>
+      <span class="nom">{{ profil.nom }}</span>
+    </h1>
+    <p class="hero__intro">
+      Futur développeur d'applications, originaire du <strong>Guangxi</strong>
+      <span lang="zh-Hans" class="zh">（广西）</span>. Descendez avec moi la rivière Li, emblème de ma région
+      natale, pour découvrir mon parcours.
+    </p>
+    <div class="hero__actions">
+      <a class="btn btn--seal" href="#realisations" (click)="allerA('realisations', $event)" appMagnetic>
+        Voir mes réalisations
+      </a>
+      <a class="btn" [href]="profil.cv" download="CV-Weimin-LIU.pdf">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+          <path d="M12 4v11m0 0-4.5-4.5M12 15l4.5-4.5M5 19h14" stroke-linecap="round" stroke-linejoin="round" />
+        </svg>
+        Mon CV
+      </a>
+      <a class="btn btn--icone" [href]="profil.github" target="_blank" rel="noopener" aria-label="Mon GitHub (nouvel onglet)">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+          <path
+            d="M12 2a10 10 0 0 0-3.16 19.49c.5.09.68-.22.68-.48v-1.7c-2.78.6-3.37-1.34-3.37-1.34-.45-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.89 1.53 2.34 1.09 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.94 0-1.09.39-1.98 1.03-2.68-.1-.25-.45-1.27.1-2.65 0 0 .84-.27 2.75 1.02a9.6 9.6 0 0 1 5 0c1.91-1.29 2.75-1.02 2.75-1.02.55 1.38.2 2.4.1 2.65.64.7 1.03 1.59 1.03 2.68 0 3.84-2.34 4.68-4.57 4.93.36.31.68.92.68 1.85v2.74c0 .27.18.58.69.48A10 10 0 0 0 12 2Z"
+          />
+        </svg>
+      </a>
+      @if (profil.linkedin) {
+        <a class="btn btn--icone" [href]="profil.linkedin" target="_blank" rel="noopener" aria-label="Mon LinkedIn (nouvel onglet)">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path
+              d="M20.45 20.45h-3.55v-5.57c0-1.33-.03-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.94v5.67H9.36V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28ZM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12ZM7.12 20.45H3.56V9h3.56v11.45ZM22.23 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0h.01Z"
+            />
+          </svg>
+        </a>
+      }
+    </div>
+  </div>
+
+  <figure class="inscription">
+    <p class="inscription__texte" lang="zh-Hans">
+      @for (car of inscription; track $index) {
+        <span class="inscription__car">{{ car }}</span>
+      }
+    </p>
+    <app-seal texte="广西" [taille]="46" label="Sceau : Guangxi" />
+    <figcaption>« Les paysages de Guilin sont les plus beaux sous le ciel. » — dicton chinois</figcaption>
+  </figure>
+
+  <a class="hero__descente" href="#profil" (click)="allerA('profil', $event)">
+    <span lang="zh-Hans" class="zh">顺流而下</span>
+    Descendre le fleuve
+    <span class="hero__trait" aria-hidden="true"></span>
+  </a>
+</section>

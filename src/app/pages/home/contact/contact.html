@@ -1,0 +1,74 @@
+<section class="section" id="contact" aria-labelledby="titre-contact">
+  <div class="lanternes" aria-hidden="true">
+    <app-lantern caractere="福" />
+    <app-lantern caractere="联" />
+    <app-lantern caractere="系" />
+  </div>
+
+  <div class="container grille">
+    <div>
+      <app-section-heading
+        numero="七"
+        kicker="Étape 7"
+        titre="Me contacter"
+        zh="联系"
+        pinyin="liánxì"
+        idTitre="titre-contact"
+        intro="Une question sur mon parcours, un stage, une alternance ou un poste ? Écrivez-moi."
+      />
+
+      <figure class="confucius" appReveal>
+        <blockquote>
+          <p lang="zh-Hans" class="zh-brush">有朋自远方来，不亦乐乎</p>
+          <p>« Recevoir un ami venu de loin, n'est-ce pas une joie ? »</p>
+        </blockquote>
+        <figcaption>Confucius, Entretiens</figcaption>
+      </figure>
+
+      <ul class="canaux" appReveal>
+        <li>
+          <span class="canal__label">E-mail</span>
+          <a [href]="'mailto:' + profil.email">{{ profil.email }}</a>
+          <button type="button" class="copier" (click)="copierEmail()">
+            {{ copie() ? 'Adresse copiée' : 'Copier' }}
+          </button>
+          <span class="visually-hidden" aria-live="polite">{{ copie() ? 'Adresse copiée dans le presse-papiers' : '' }}</span>
+        </li>
+        <li>
+          <span class="canal__label">GitHub</span>
+          <a [href]="profil.github" target="_blank" rel="noopener">github.com/LWM07</a>
+        </li>
+        @if (profil.linkedin) {
+          <li>
+            <span class="canal__label">LinkedIn</span>
+            <a [href]="profil.linkedin" target="_blank" rel="noopener">Mon profil LinkedIn</a>
+          </li>
+        }
+        <li>
+          <span class="canal__label">CV</span>
+          <a [href]="profil.cv" download="CV-Weimin-LIU.pdf">Télécharger mon CV (PDF)</a>
+        </li>
+      </ul>
+    </div>
+
+    <form class="lettre paper-card" (submit)="ecrire($event)" appReveal="right">
+      <h3>Écrire un message</h3>
+      <label>
+        Votre nom
+        <input name="nom" type="text" required autocomplete="name" />
+      </label>
+      <label>
+        Objet
+        <input name="objet" type="text" required />
+      </label>
+      <label>
+        Message
+        <textarea name="message" rows="5" required></textarea>
+      </label>
+      <p class="aide">
+        Le bouton ouvre votre messagerie avec le message déjà rédigé : rien n'est envoyé ni enregistré par ce site.
+      </p>
+      <button type="submit" class="btn btn--seal" appMagnetic>Ouvrir ma messagerie</button>
+    </form>
+  </div>
+</section>

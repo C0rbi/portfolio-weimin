@@ -1,0 +1,33 @@
+// Transitions entre pages (API View Transitions, activée dans app.config.ts) :
+// la nouvelle page se déroule de haut en bas, comme un rouleau de peinture qu'on ouvre.
+
+@keyframes vt-sortie {
+  to {
+    opacity: 0;
+    transform: translateY(-24px);
+  }
+}
+
+@keyframes vt-deroule {
+  from {
+    clip-path: inset(0 0 100% 0);
+  }
+  to {
+    clip-path: inset(0 0 0 0);
+  }
+}
+
+:root.motion-ok:not(.vt-theme)::view-transition-old(root) {
+  animation: vt-sortie 0.45s var(--ease-in-out) both;
+}
+
+:root.motion-ok:not(.vt-theme)::view-transition-new(root) {
+  animation: vt-deroule 0.85s var(--ease-in-out) both;
+}
+
+// Changement jour / nuit : l'animation (cercle d'encre) est pilotée en JavaScript par ThemeService.
+:root.vt-theme::view-transition-old(root),
+:root.vt-theme::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
+}

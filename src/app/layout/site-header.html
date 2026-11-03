@@ -1,0 +1,88 @@
+<header class="entete" [class.entete--defile]="defile()" [class.entete--cache]="cache()">
+  <div class="entete__barre">
+    <a class="logo" routerLink="/" aria-label="Weimin LIU, retour à l'accueil">
+      <app-seal texte="桂" [taille]="40" />
+      <span class="logo__texte">
+        <strong>Weimin LIU</strong>
+        <small>BTS SIO · SLAM</small>
+      </span>
+    </a>
+
+    <nav class="nav" aria-label="Navigation principale">
+      <ul>
+        @for (lien of liens; track lien.id) {
+          <li>
+            <a
+              [href]="'#' + lien.id"
+              (click)="aller($event, lien.id)"
+              [class.actif]="sections.active() === lien.id"
+              [attr.aria-current]="sections.active() === lien.id ? 'location' : null"
+            >
+              <span class="nav__zh" lang="zh-Hans" aria-hidden="true">{{ lien.zh }}</span>
+              <span>{{ lien.label }}</span>
+            </a>
+          </li>
+        }
+      </ul>
+    </nav>
+
+    <div class="outils">
+      <button
+        type="button"
+        class="outil"
+        (click)="motion.basculer()"
+        [attr.aria-pressed]="motion.enabled()"
+        [attr.title]="motion.enabled() ? 'Couper les animations' : 'Activer les animations'"
+      >
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M3 9c2.5-3 4.5-3 7 0s4.5 3 7 0 3.5-2.5 4-2" />
+          <path d="M3 15c2.5-3 4.5-3 7 0s4.5 3 7 0 3.5-2.5 4-2" />
+          @if (!motion.enabled()) {
+            <path class="barre" d="M4 21 20 3" />
+          }
+        </svg>
+        <span class="visually-hidden">Animations {{ motion.enabled() ? 'activées' : 'coupées' }}</span>
+      </button>
+
+      <button
+        type="button"
+        class="outil outil--zh"
+        (click)="basculerTheme($event)"
+        [attr.title]="theme.theme() === 'dark' ? 'Passer en mode jour' : 'Passer en mode nuit'"
+      >
+        <span lang="zh-Hans" aria-hidden="true">{{ theme.theme() === 'dark' ? '月' : '日' }}</span>
+        <span class="visually-hidden">{{ theme.theme() === 'dark' ? 'Passer en mode jour' : 'Passer en mode nuit' }}</span>
+      </button>
+
+      <button
+        #boutonMenu
+        type="button"
+        class="menu-bouton"
+        (click)="ouvrirMenu()"
+        aria-controls="menu-mobile"
+        [attr.aria-expanded]="menuOuvert()"
+      >
+        <span lang="zh-Hans" aria-hidden="true">菜单</span> Menu
+      </button>
+    </div>
+  </div>
+</header>
+
+@if (menuOuvert()) {
+  <div class="menu" id="menu-mobile" role="dialog" aria-modal="true" aria-label="Menu" data-lenis-prevent>
+    <button type="button" class="menu__fermer" (click)="fermerMenu()">
+      Fermer <span aria-hidden="true">✕</span>
+    </button>
+    <ol class="menu__liste">
+      @for (lien of liens; track lien.id) {
+        <li>
+          <a class="menu__lien" [href]="'#' + lien.id" (click)="aller($event, lien.id)">
+            <span class="menu__num" lang="zh-Hans" aria-hidden="true">{{ lien.numero }}</span>
+            <span class="menu__label">{{ lien.label }}</span>
+            <span class="menu__zh" lang="zh-Hans" aria-hidden="true">{{ lien.zh }}</span>
+          </a>
+        </li>
+      }
+    </ol>
+  </div>
+}

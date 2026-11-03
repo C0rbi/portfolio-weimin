@@ -1,0 +1,78 @@
+@use 'mixins' as *;
+
+:host {
+  display: block;
+  --drum-clair: #c9a067;
+  --drum-fonce: #6b4e2b;
+  --drum-trait: rgba(48, 30, 12, 0.6);
+}
+
+:host-context([data-theme='dark']) {
+  --drum-clair: #b38d58;
+  --drum-fonce: #4d371d;
+  --drum-trait: rgba(20, 12, 4, 0.7);
+}
+
+svg {
+  width: 100%;
+  height: auto;
+  overflow: visible;
+  filter: drop-shadow(0 24px 40px rgba(60, 40, 15, 0.28));
+}
+
+.clair {
+  stop-color: var(--drum-clair);
+}
+
+.fonce {
+  stop-color: var(--drum-fonce);
+}
+
+.bord {
+  stroke: var(--drum-trait);
+  stroke-width: 1.5;
+}
+
+.trait {
+  fill: none;
+  stroke: var(--drum-trait);
+  stroke-width: 1;
+}
+
+.epais {
+  stroke-width: 2.2;
+  stroke-linecap: round;
+}
+
+.soleil {
+  fill: var(--drum-trait);
+}
+
+.motif {
+  fill: var(--drum-trait);
+}
+
+.pattes {
+  fill: none;
+  stroke: var(--drum-trait);
+  stroke-width: 1.4;
+  stroke-linecap: round;
+}
+
+.patine {
+  fill: #5f9a86;
+  opacity: 0.22;
+}
+
+// Le tambour tourne lentement sur lui-même.
+.motifs {
+  @include motion-ok {
+    animation: tourner 90s linear infinite;
+  }
+}
+
+@keyframes tourner {
+  to {
+    transform: rotate(360deg);
+  }
+}

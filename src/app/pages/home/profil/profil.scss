@@ -1,0 +1,255 @@
+@use 'mixins' as *;
+
+.profil {
+  display: grid;
+  grid-template-columns: minmax(260px, 0.9fr) 1.1fr;
+  gap: clamp(32px, 6vw, 88px);
+  align-items: center;
+
+  @include below($md) {
+    grid-template-columns: 1fr;
+  }
+}
+
+// ─── Porte de lune ─────────────────────────────────────────
+
+.porte {
+  position: relative;
+  display: grid;
+  justify-items: center;
+  gap: 14px;
+  margin: 0;
+
+  app-seal {
+    position: absolute;
+    right: 8%;
+    bottom: 56px;
+  }
+
+  figcaption {
+    color: var(--ink-3);
+    font-size: 0.85rem;
+
+    .zh {
+      margin-right: 0.3em;
+      font-family: var(--font-brush);
+      font-size: 1.15rem;
+      color: var(--ink-2);
+    }
+  }
+}
+
+.porte__mur {
+  position: relative;
+  width: min(100%, 400px);
+  aspect-ratio: 1;
+  padding: 7%;
+  border-radius: 6px;
+  // Mur blanchi et toit de tuiles grises, comme dans les jardins de Suzhou.
+  background:
+    repeating-linear-gradient(90deg, var(--mtn-3) 0 14px, var(--mtn-4) 14px 16px) top / 100% 18px no-repeat,
+    linear-gradient(var(--paper-2), var(--paper-3));
+  box-shadow: var(--shadow);
+}
+
+.porte__photo {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  border-radius: 50%;
+  box-shadow: inset 0 0 0 6px var(--paper-3);
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: 50% 22%;
+  }
+}
+
+.porte__anneau {
+  position: absolute;
+  inset: 4%;
+  width: 92%;
+  height: 92%;
+  overflow: visible;
+  pointer-events: none;
+
+  circle {
+    fill: none;
+    stroke: var(--mtn-3);
+    stroke-width: 6;
+  }
+}
+
+// ─── Texte ─────────────────────────────────────────────────
+
+.profil__texte {
+  p {
+    color: var(--ink-2);
+    font-size: 1.08rem;
+  }
+
+  p:first-child {
+    color: var(--ink);
+    font-family: var(--font-display);
+    font-size: clamp(1.45rem, 2.4vw, 1.9rem);
+    font-weight: 500;
+    line-height: 1.3;
+  }
+}
+
+.faits {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 18px 28px;
+  margin: 28px 0 0;
+
+  @include below($sm) {
+    grid-template-columns: 1fr;
+  }
+
+  div {
+    padding-top: 12px;
+    border-top: 1px solid var(--line-strong);
+  }
+
+  dt {
+    color: var(--cinnabar);
+    font-size: 0.74rem;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+  }
+
+  dd {
+    margin: 4px 0 0;
+    font-weight: 600;
+  }
+
+  .zh {
+    margin-left: 0.3em;
+    font-family: var(--font-zh);
+    color: var(--ink-3);
+  }
+}
+
+// ─── Cartes du bas ─────────────────────────────────────────
+
+.annexes {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr 1fr;
+  gap: 20px;
+  margin-top: clamp(48px, 7vw, 88px);
+
+  @include below($lg) {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  @include below($md) {
+    grid-template-columns: 1fr;
+  }
+
+  > div {
+    padding: 26px 26px 22px;
+  }
+
+  h3 {
+    margin-bottom: 16px;
+    font-size: 1.6rem;
+  }
+}
+
+.langues ul,
+.interets ul {
+  display: grid;
+  gap: 14px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.langues li {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 2px 12px;
+  align-items: center;
+}
+
+.langues__nom {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+
+  .natif {
+    color: var(--ink-3);
+    font-size: 0.9rem;
+  }
+}
+
+.langues__niveau {
+  grid-column: 1 / -1;
+  color: var(--ink-3);
+  font-size: 0.85rem;
+}
+
+.jauge {
+  display: flex;
+  gap: 5px;
+}
+
+.jauge__point {
+  width: 10px;
+  height: 10px;
+  border: 1px solid var(--line-strong);
+  border-radius: 2px;
+  transform: rotate(45deg);
+
+  &.plein {
+    border-color: var(--cinnabar);
+    background: var(--cinnabar);
+  }
+}
+
+.guangxi {
+  h3 .zh-brush {
+    margin-right: 0.2em;
+    color: var(--cinnabar);
+  }
+
+  p {
+    color: var(--ink-2);
+    font-size: 0.95rem;
+  }
+
+  .zh {
+    font-family: var(--font-zh);
+  }
+}
+
+.interets li {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+
+  strong {
+    display: block;
+  }
+
+  small {
+    color: var(--ink-3);
+    font-size: 0.85rem;
+  }
+}
+
+.interets__zh {
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--jade) 14%, transparent);
+  color: var(--jade);
+  font-size: 1.25rem;
+}
